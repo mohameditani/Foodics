@@ -1,0 +1,34 @@
+PODS:
+  - Alamofire (4.9.0)
+  - Bolts-Swift (1.5.0)
+  - MBProgressHUD (1.0.0)
+  - SDWebImage (5.2.3):
+    - SDWebImage/Core (= 5.2.3)
+  - SDWebImage/Core (5.2.3)
+  - SwiftyJSON (4.3.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - Bolts-Swift
+  - MBProgressHUD (~> 1.0.0)
+  - SDWebImage
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Bolts-Swift
+    - MBProgressHUD
+    - SDWebImage
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
+  Bolts-Swift: afbbaf8c8186e7f769be4afa656949c14087ba44
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  SDWebImage: 46a7f73228f84ce80990c786e4372cf4db5875ce
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+
+PODFILE CHECKSUM: 25f7c576e08f45fcb99c84199baad51865b16ada
+
+COCOAPODS: 1.5.3
