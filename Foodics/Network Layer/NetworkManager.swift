@@ -9,11 +9,15 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class NetworkManager: NSObject {
     
     static let shared = NetworkManager()
     
+    static var categoriesUrl = API_SERVER_URL + "/categories"
+    static var productsUrl = API_SERVER_URL + "/products?include=category"
+
     private let manager: Alamofire.SessionManager = {
         
         let configuration = URLSessionConfiguration.default
@@ -23,40 +27,42 @@ class NetworkManager: NSObject {
         
     }()
     
-    //MARK: GET method
-    
-    func requestGETURL(_ strURL: String, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void)
-    {
+    //MARK: Helpers
+    static func getHeaders() -> HTTPHeaders {
+        
         let headers: HTTPHeaders = [
             "Authorization": String(format: "Bearer %@", API_TOKEN),
             "Accept": "application/json",
             "Content-Type": "application/json"
         ]
-                
-        Alamofire.request(strURL,encoding: JSONEncoding.default, headers:headers).responseJSON { (responseObject) -> Void in
+        
+        return headers
+    }
+    
+    //MARK: API
+        
+    static func requestGetURL(url:String) -> Promise<Any> {
+        
+        return Promise { seal in
+            Alamofire.request(url,encoding:JSONEncoding.default, headers:getHeaders())
+                .validate()
+                .responseJSON { response in
+                    
+                    switch response.result {
+                        
+                        case .success(_):
+                            
+                            let resJson = JSON(response.result.value!)
+                                                        
+                            seal.fulfill(resJson)
+                            
 
-            print(responseObject)
-
-            if responseObject.result.isSuccess {
-
-                
-                let resJson = JSON(responseObject.result.value!)
-                DataManager.saveResponse(resJson, key: strURL)
-
-                success(resJson)
-            }
-            
-            if responseObject.result.isFailure {
-                
-                if let resJson = DataManager.loadResponse(key: strURL) {
-                    success(resJson)
-
-                    return
-                }
-                
-                let error : Error = responseObject.result.error!
-                failure(error)
+                    case .failure(let error):
+                        
+                            seal.reject(error)
+                    }
             }
         }
+        
     }
 }

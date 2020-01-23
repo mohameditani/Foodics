@@ -3,20 +3,19 @@ import Foundation
 import SwiftyJSON
 
 // MARK: - Category
-class Category: Codable {
+class Category: NSObject,NSCoding {
+
+    let nameLocalizedParsingKey = "nameLocalized"
+    let nameParsingKey = "name"
+    let updatedAtParsingKey = "updatedAt"
+    let deletedAtParsingKey = "deletedAt"
+    let idParsingKey = "id"
+    let createdAtParsingKey = "createdAt"
+    let referenceParsingKey = "reference"
 
     let name, updatedAt, deletedAt, id: String?
     let createdAt, nameLocalized, reference: String?
 
-    enum CodingKeys: String, CodingKey {
-        case name
-        case updatedAt = "updated_at"
-        case deletedAt = "deleted_at"
-        case id
-        case createdAt = "created_at"
-        case nameLocalized = "name_localized"
-        case reference
-    }
 
     init(name: String?, updatedAt: String?, deletedAt: String?, id: String?, createdAt: String?, nameLocalized: String?, reference: String?) {
         self.name = name
@@ -27,6 +26,34 @@ class Category: Codable {
         self.nameLocalized = nameLocalized
         self.reference = reference
     }
+    
+    //MARK: NSCoding
+     
+      func encode(with aCoder: NSCoder) {
+         
+         aCoder.encode(self.name, forKey: nameParsingKey)
+         aCoder.encode(self.updatedAt, forKey: updatedAtParsingKey)
+         aCoder.encode(self.deletedAt, forKey: deletedAtParsingKey)
+         aCoder.encode(self.id, forKey: idParsingKey)
+         aCoder.encode(self.createdAt, forKey: createdAtParsingKey)
+         aCoder.encode(self.nameLocalized, forKey: nameLocalizedParsingKey)
+         aCoder.encode(self.reference, forKey: referenceParsingKey)
+
+     }
+     
+    required convenience init?(coder decoder: NSCoder) {
+
+        let name = decoder.decodeObject(forKey: "name") as? String
+        let updatedAt = decoder.decodeObject(forKey: "updatedAt") as? String
+        let deletedAt = decoder.decodeObject(forKey: "deletedAt") as? String
+        let id = decoder.decodeObject(forKey: "id") as? String
+        let createdAt = decoder.decodeObject(forKey: "createdAt") as? String
+        let nameLocalized = decoder.decodeObject(forKey: "nameLocalized") as? String
+        let reference = decoder.decodeObject(forKey: "reference") as? String
+        
+        self.init(name:name,updatedAt:updatedAt,deletedAt:deletedAt,id:id,createdAt:createdAt,nameLocalized:nameLocalized,reference:reference)
+           
+       }
     
     
     //MARK: Helpers

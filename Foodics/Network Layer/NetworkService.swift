@@ -7,84 +7,97 @@
 //
 
 import UIKit
-
-public typealias APICompletionHandler = (_ success:Bool,_ result:Response?) -> Void
+import PromiseKit
+import SwiftyJSON
 
 class NetworkService: NSObject {
 
-    static var categoriesUrl = API_SERVER_URL + "/categories"
+    static let shared = NetworkService()
+
+     var categoriesUrl = API_SERVER_URL + "/categories"
     
-    static var productsUrl = API_SERVER_URL + "/products?include=category"
+     var productsUrl = API_SERVER_URL + "/products?include=category"
     
     
     //MARK: API's
     
-    static func getCategories(completionHandler:APICompletionHandler?){
+     func getCategories() -> Promise<Any> {
         
-        NetworkManager.shared.requestGETURL(categoriesUrl, success: { (json) in
-            
-            if let jsonArr = json["data"].array {
+      return Promise { seal in
+        
+        NetworkManager.requestGetURL(url: categoriesUrl)
+                        
+            .done { json -> Void in
                 
-                let arr = Category.parseData(jsonArr: jsonArr)
-
-                let response = Response.init(status: 1, data: arr, message: "")
-                
-                if let _ = completionHandler {
-                    completionHandler!(true,response)
-                }
-                
-                return
-            }
-                            
-            if let _ = completionHandler {
-                  completionHandler!(false,nil)
-              }
-            
-         }) { (error) in
-             
-             let response = Response.initFromError(error: error)
-                
-                if let _ = completionHandler {
+                if let convertedJson = json as? JSON {
                     
-                    completionHandler!(false,response)
+                     if let jsonArr = convertedJson["data"].array {
+                       
+                        let arr = Category.parseData(jsonArr: jsonArr)
+                        
+                        let response = Response.init(status: 1, data: arr, message: "")
+                        
+                        DataManager.shared.saveResponse(response: response, url: self.categoriesUrl)
+                        
+                        seal.fulfill(response)
+
+                        return
+                    }
                 }
-             
-                print(error)
-         }
+            }
+            .catch { error in
+                
+                let response = DataManager.shared.loadResponse(url: self.categoriesUrl)
+                
+                if let _ = response {
+                    
+                    seal.fulfill(response as Any)
+                }
+                
+                seal.reject(error)
+            }
+        }
     }
     
-    static func getProducts(completionHandler:APICompletionHandler?) {
-        
-        NetworkManager.shared.requestGETURL(productsUrl, success: { (json) in
+     func getProducts() -> Promise<Any> {
+           
+         return Promise { seal in
+           
+           NetworkManager.requestGetURL(url: productsUrl)
+                           
+               .done { json -> Void in
+                   
+                   if let convertedJson = json as? JSON {
+                       
+                        if let jsonArr = convertedJson["data"].array {
+                          
+                           let arr = Product.parseData(jsonArr: jsonArr)
 
-            if let jsonArr = json["data"].array {
+                           let response = Response.init(status: 1, data: arr, message: "")
+                           
+                            DataManager.shared.saveResponse(response: response, url: self.productsUrl)
 
-                let arr = Product.parseData(jsonArr:jsonArr)
-             
-                let response = Response.init(status: 1, data: arr, message: "")
+                           seal.fulfill(response)
 
-                if let _ = completionHandler {
-                        
-                    completionHandler!(true,response)
-                }
+                           return
+                       }
+                   }
+               }
+               .catch { error in
                 
-                return
-            }
-            
-            if let _ = completionHandler {
+                    let response = DataManager.shared.loadResponse(url: self.productsUrl)
+
+                    if let _ = response {
+                        seal.fulfill(response as Any)
+                    }
                 
-                 completionHandler!(false,nil)
-             }
-            
-           }) { (error) in
-               
-               let response = Response.initFromError(error: error)
-               completionHandler!(false,response)
-               
-               print(error)
-               
+                   seal.reject(error)
+               }
            }
-    }
+       }
+    
+  
+
     
     
     

@@ -11,20 +11,32 @@ import SwiftyJSON
 
 class DataManager: NSObject {
     
-    static func saveResponse(_ value: JSON, key: String) {
+   static let shared = DataManager()
+    
+    var categoriesArr = [Category]()
+    var productsArr = [Product]()
         
-        let ud = UserDefaults.standard
-        let archivedPool = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true)
-        ud.set(archivedPool, forKey: key)
+    func saveResponse(response: Response,url:String){
+       
+        let data = NSKeyedArchiver.archivedData(withRootObject: response)
+        UserDefaults.standard.set(data, forKey: url)
+       
     }
     
-   static func loadResponse(key: String) -> JSON? {
-          let ud = UserDefaults.standard
-          if let val = ud.value(forKey: key) as? Data,
-              let obj = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(val) as? JSON {
-              return obj
-          }
-          return nil
-      }
+     func loadResponse(url:String) -> Response? {
+        
+        if let data = UserDefaults.standard.object(forKey: url) as? NSData {
+            return NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? Response
+        }
+                
+        return nil
+    }
+    
+    func getProductsForCategory(cat:Category) -> [Product] {
+        
+        let products = DataManager.shared.productsArr.filter({$0.category?.id == cat.id})
+
+        return products
+    }
 
 }

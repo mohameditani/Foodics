@@ -32,8 +32,8 @@ class CategoryViewController: CategoriesViewController,ProductDelegate {
     
     override func initialiseLayout() {
             
-        view.backgroundColor = DARK_GRAY_COLOR
-        collectionView.backgroundColor = DARK_GRAY_COLOR
+        view.backgroundColor = .white
+        collectionView.backgroundColor = .white
 
         collectionView.registerCell(cellIdentifier: cellIdentifier)
     }
@@ -88,7 +88,7 @@ extension CategoryViewController:UICollectionViewDelegate,UICollectionViewDataSo
         
         let cat = categoryArr[indexPath.row]
         
-        let products = Utils.getAppDelegate().productsArr.filter({$0.category?.id == cat.id})
+        let products = DataManager.shared.getProductsForCategory(cat: cat)
         
         if (products.count > 0) {
         

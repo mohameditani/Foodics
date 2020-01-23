@@ -19,8 +19,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         titleBackView.backgroundColor = YELLOW_COLOR
         titleLabel.textColor = DARK_GRAY_COLOR
         
-        titleBackView.layer.masksToBounds = true
-        titleBackView.layer.cornerRadius = 15
+        titleBackView.roundRect(radius: 15)
                 
         // Initialization code
     }

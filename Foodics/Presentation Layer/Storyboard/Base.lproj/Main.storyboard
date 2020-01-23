@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,8 +19,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="pb4-K9-4Ch">
                                 <rect key="frame" x="128" y="256" width="512" height="512"/>
                             </imageView>
-                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="DCq-uW-MXy">
-                                <rect key="frame" x="365.5" y="935" width="37" height="37"/>
+                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="DCq-uW-MXy">
+                                <rect key="frame" x="374" y="952" width="20" height="20"/>
                                 <color key="backgroundColor" red="0.81568627449999997" green="0.89019607840000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
@@ -105,7 +106,82 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PcD-4q-ujD">
                                 <rect key="frame" x="134" y="183" width="500" height="658"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="b0m-ef-ggt">
+                                        <rect key="frame" x="20" y="20" width="240" height="209"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="209" id="ZCw-ks-zkz"/>
+                                            <constraint firstAttribute="width" constant="240" id="r7n-aB-kBx"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drinks" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmB-h9-OqH">
+                                        <rect key="frame" x="280" y="20" width="210" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drinks" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18w-KC-Lrq">
+                                        <rect key="frame" x="280" y="57" width="210" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drinks" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o55-I0-JdM">
+                                        <rect key="frame" x="280" y="94" width="210" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSi-65-Kin">
+                                        <rect key="frame" x="20" y="244" width="470" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Li2-Ab-WCG">
+                                        <rect key="frame" x="20" y="288" width="470" height="270"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsW-BP-lRO">
+                                        <rect key="frame" x="175" y="588" width="150" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="E3h-PG-FeN"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="wm7-Ug-CyD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="submitButtonClicked:" destination="hWo-dA-bAY" eventType="touchUpInside" id="VSp-8R-0JL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="KsW-BP-lRO" firstAttribute="top" secondItem="Li2-Ab-WCG" secondAttribute="bottom" constant="30" id="43M-4X-Mlj"/>
+                                    <constraint firstItem="KsW-BP-lRO" firstAttribute="centerX" secondItem="PcD-4q-ujD" secondAttribute="centerX" id="6vA-Xj-fJL"/>
+                                    <constraint firstItem="o55-I0-JdM" firstAttribute="trailing" secondItem="18w-KC-Lrq" secondAttribute="trailing" id="AgK-L1-Hag"/>
+                                    <constraint firstItem="TSi-65-Kin" firstAttribute="leading" secondItem="b0m-ef-ggt" secondAttribute="leading" id="AjD-Av-4OV"/>
+                                    <constraint firstItem="TSi-65-Kin" firstAttribute="top" secondItem="b0m-ef-ggt" secondAttribute="bottom" constant="15" id="BtG-qJ-8HD"/>
+                                    <constraint firstAttribute="bottom" secondItem="KsW-BP-lRO" secondAttribute="bottom" constant="20" id="GFx-4z-vWv"/>
+                                    <constraint firstItem="b0m-ef-ggt" firstAttribute="top" secondItem="PcD-4q-ujD" secondAttribute="top" constant="20" id="GGH-JM-PUT"/>
+                                    <constraint firstItem="GmB-h9-OqH" firstAttribute="top" secondItem="b0m-ef-ggt" secondAttribute="top" id="QIl-qm-wa7"/>
+                                    <constraint firstItem="Li2-Ab-WCG" firstAttribute="top" secondItem="TSi-65-Kin" secondAttribute="bottom" constant="15" id="V0g-9b-kAq"/>
+                                    <constraint firstItem="18w-KC-Lrq" firstAttribute="leading" secondItem="GmB-h9-OqH" secondAttribute="leading" id="WP9-GE-kfL"/>
+                                    <constraint firstItem="o55-I0-JdM" firstAttribute="top" secondItem="18w-KC-Lrq" secondAttribute="bottom" constant="8" id="Yvt-oq-iMl"/>
+                                    <constraint firstItem="18w-KC-Lrq" firstAttribute="trailing" secondItem="GmB-h9-OqH" secondAttribute="trailing" id="aYw-ks-eJF"/>
+                                    <constraint firstItem="GmB-h9-OqH" firstAttribute="leading" secondItem="b0m-ef-ggt" secondAttribute="trailing" constant="20" id="bNW-lJ-rrz"/>
+                                    <constraint firstItem="b0m-ef-ggt" firstAttribute="leading" secondItem="PcD-4q-ujD" secondAttribute="leading" constant="20" id="cES-oo-CXe"/>
+                                    <constraint firstItem="TSi-65-Kin" firstAttribute="trailing" secondItem="o55-I0-JdM" secondAttribute="trailing" id="hSK-Xl-83P"/>
+                                    <constraint firstItem="o55-I0-JdM" firstAttribute="leading" secondItem="18w-KC-Lrq" secondAttribute="leading" id="j51-0W-Mgg"/>
+                                    <constraint firstItem="Li2-Ab-WCG" firstAttribute="trailing" secondItem="TSi-65-Kin" secondAttribute="trailing" id="jfg-nU-iUi"/>
+                                    <constraint firstAttribute="trailing" secondItem="GmB-h9-OqH" secondAttribute="trailing" constant="10" id="lks-Ei-UUC"/>
+                                    <constraint firstItem="Li2-Ab-WCG" firstAttribute="leading" secondItem="TSi-65-Kin" secondAttribute="leading" id="mlg-yI-G1s"/>
+                                    <constraint firstItem="18w-KC-Lrq" firstAttribute="top" secondItem="GmB-h9-OqH" secondAttribute="bottom" constant="8" id="yTW-mz-djZ"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -123,6 +199,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oGC-uQ-s5q"/>
                     </view>
+                    <connections>
+                        <outlet property="backView" destination="PcD-4q-ujD" id="mQX-ZH-A8P"/>
+                        <outlet property="cancelButton" destination="KsW-BP-lRO" id="0Qk-pM-hZw"/>
+                        <outlet property="categoryLabel" destination="18w-KC-Lrq" id="FR8-TO-vLA"/>
+                        <outlet property="descriptionLabel" destination="TSi-65-Kin" id="9jC-T3-mmx"/>
+                        <outlet property="descriptionTextView" destination="Li2-Ab-WCG" id="aG4-aB-1Sf"/>
+                        <outlet property="displayImageView" destination="b0m-ef-ggt" id="HMQ-Hs-jFe"/>
+                        <outlet property="priceLabel" destination="o55-I0-JdM" id="vff-pi-y9M"/>
+                        <outlet property="titleLabel" destination="GmB-h9-OqH" id="qTt-JY-JdP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Reg-La-78Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -251,6 +337,7 @@
     </scenes>
     <resources>
         <image name="Splash" width="512" height="512"/>
+        <image name="placeholder" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="opN-Sj-HMM"/>

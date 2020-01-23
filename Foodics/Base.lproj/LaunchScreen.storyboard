@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="vdT-tm-gyu">
-                                <rect key="frame" x="128" y="256" width="512" height="512"/>
+                                <rect key="frame" x="128" y="258.5" width="512" height="512"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.81568627450980391" green="0.8901960784313725" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="vdT-tm-gyu" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="YDv-yw-wrM"/>
-                            <constraint firstItem="vdT-tm-gyu" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="vTh-yq-TPr"/>
+                            <constraint firstItem="vdT-tm-gyu" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="2.5" id="vTh-yq-TPr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

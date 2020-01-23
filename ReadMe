@@ -1,0 +1,14 @@
+
+Process Chaining (Bolts, Promise): I used PromiseKit as process chaining framework. It was used for api handling.
+
+Delegate & protocols: used in displaying categories & products data + delegate on product selection
+
+Data Persistence: NSKeyarchiver where I stored the response object to it matching api url
+
+OOP : Inheritance, Interface ...
+
+JSON : Used in data parsing on the api level
+
+Error Handling : alerts + related to the first point
+
+Design Patterns: Singleton for the api & data manager , facade in mbprogresshud & sd_webimage

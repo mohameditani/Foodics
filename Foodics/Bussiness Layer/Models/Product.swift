@@ -7,7 +7,7 @@ import Foundation
 import SwiftyJSON
 
 // MARK: - Product
-class Product: Codable {
+class Product: NSObject,NSCoding {
     let nameLocalized: String?
     let sku: String?
     let isReady,isStockProduct, isActive: Bool?
@@ -72,28 +72,6 @@ class Product: Codable {
            return dataArr
            
        }
-
-    enum CodingKeys: String, CodingKey {
-        case nameLocalized = "name_localized"
-        case isReady = "is_ready"
-        case costingMethod = "costing_method"
-        case sku
-        case isStockProduct = "is_stock_product"
-        case isActive = "is_active"
-        case id, image
-        case deletedAt = "deleted_at"
-        case sellingMethod = "selling_method"
-        case price, barcode
-        case preparationTime = "preparation_time"
-        case pricingMethod = "pricing_method"
-        case createdAt = "created_at"
-        case name, calories
-        case updatedAt = "updated_at"
-        case descriptionLocalized = "description_localized"
-        case productDescription = "description"
-        case category, cost
-    }
-    
    
 
     init(nameLocalized: String?, isReady: Bool?, costingMethod: Int?, sku: String?, isStockProduct: Bool?, isActive: Bool?, id: String?, image: String?, deletedAt: String?, sellingMethod: Int?, price: Int?, barcode: String?, preparationTime: String?, pricingMethod: Int?, createdAt: String?, name: String?, calories: String?, updatedAt: String?, descriptionLocalized: String?, productDescription: String?, category: Category?, cost: Double?) {
@@ -120,6 +98,33 @@ class Product: Codable {
         self.category = category
         self.cost = cost
     }
+    
+    //MARK: NSCoding
+    
+    func encode(with aCoder: NSCoder) {
+           
+           aCoder.encode(self.category, forKey: "category")
+           aCoder.encode(self.productDescription, forKey: "productDescription")
+           aCoder.encode(self.name, forKey: "name")
+           aCoder.encode(self.price, forKey: "price")
+           aCoder.encode(self.image, forKey: "image")
+        aCoder.encode(self.id, forKey: "id")
+
+       }
+       
+      required convenience init?(coder decoder: NSCoder) {
+
+          let cat = decoder.decodeObject(forKey: "category") as? Category
+          let desc = decoder.decodeObject(forKey: "productDescription") as? String
+          let name = decoder.decodeObject(forKey: "name") as? String
+          let price = decoder.decodeObject(forKey: "price") as? Int
+          let image = decoder.decodeObject(forKey: "image") as? String
+          let id = decoder.decodeObject(forKey: "id") as? String
+
+        self.init(nameLocalized: nil, isReady: nil, costingMethod: nil, sku: nil, isStockProduct: nil, isActive: nil, id: id, image: image, deletedAt: nil, sellingMethod: nil, price: price, barcode: nil, preparationTime: nil, pricingMethod: nil, createdAt: nil, name: name, calories: nil, updatedAt: nil, descriptionLocalized: nil, productDescription: desc, category: cat, cost: nil)
+
+             
+         }
     
     
 }

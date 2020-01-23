@@ -30,7 +30,7 @@ class CategoriesViewController: GeneralViewController,PagerViewControllerDelegat
         
         self.navigationController?.navigationBar.tintColor = DARK_GRAY_COLOR
 
-        setCategoryPages(dataArr:Utils.getAppDelegate().categoriesArr)
+        setCategoryPages(dataArr:DataManager.shared.categoriesArr)
     }
     
     func addBarButtons() {

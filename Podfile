@@ -14,6 +14,6 @@ target 'Foodics' do
   pod 'Alamofire'
   pod 'SwiftyJSON', '~> 4.0'
 
-  pod 'Bolts-Swift'
+  pod "PromiseKit", "~> 6.8"
 
 end

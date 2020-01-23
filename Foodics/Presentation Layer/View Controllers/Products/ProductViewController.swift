@@ -16,7 +16,7 @@ class ProductViewController: CategoryViewController {
     
     override func viewDidLoad() {
         
-        height = 200
+        height = 210
         cellIdentifier = "ProductCollectionViewCell"
         
         super.viewDidLoad()

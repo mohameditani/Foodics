@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import BoltsSwift
 
 
 class SplashViewController: GeneralViewController {
@@ -21,89 +20,74 @@ class SplashViewController: GeneralViewController {
         
     }
     
-  func testTask() {
-        let taskHello1 = echo("hello1")
-    
-        let taskHello2 = taskHello1.continueOnSuccessWith(continuation: { (task) -> Task<String> in
-            let taskResult = self.echo("error")
-            return taskResult
-        })
-       _ = taskHello2.continueOnErrorWith(continuation: { (task) -> Task<String> in
-            let taskResult = self.echo("Error received")
-            return taskResult
-        })
-        _ = taskHello2.continueOnSuccessWith(continuation: { (task) -> Task<String> in
-            let taskResult = self.echo("Success received")
-            return taskResult
-        })
-    }
-
-    func echo(_ text: String) -> Task<String> {
-        let taskCompletionSource = TaskCompletionSource<String>()
-        print("=> \(text)")
-        switch (text) {
-        case "error":
-            let error = NSError(domain: "domain", code: -1, userInfo: ["userInfo": "userInfo"])
-            taskCompletionSource.set(error: error)
-        case "cancel":
-            taskCompletionSource.cancel()
-        default:
-            taskCompletionSource.set(result: text)
-        }
-        return taskCompletionSource.task
-    }
-    
     //MARK: Layout
       
       override func initialiseLayout() {
           
         self.loader.color = DARK_GRAY_COLOR
-        getCategoriesData()
+        getCategories()
           
       }
-    
+        
     //MARK: API
-      
-      func getCategoriesData() {
-                  
-          loader.startAnimating()
-          
-          NetworkService.getCategories { (success, response) in
+    
+    func getCategories() {
+           
+           loader.startAnimating()
+        
+        NetworkService.shared.getCategories()
+               
+           .done { json -> Void in
+               
+               let response = json as! Response
+            
+                DataManager.shared.categoriesArr = response.data as! [Category]
 
-              if (success) {
-                                
-                Utils.getAppDelegate().categoriesArr = response!.data as! [Category]
-                
-                self.getProductsData()
-                
-              } else {
+               self.getProducts()
 
-                    self.loader.stopAnimating()
+           }
+           .catch { error in
 
-                    Utils.showAlert(alertTitle: Utils.getAppName(), alertMessage: response?.message ?? "", cancelTitle: Utils.getStringWithTag(tag: "Cancel"), otherTitle: Utils.getStringWithTag(tag: "Reload"), VC: self) { (Index) in
-                    
-                        if (Index == 1) {
-                            self.getCategoriesData()
-                        }
+                self.loader.stopAnimating()
+
+               Utils.showAlert(alertTitle: Utils.getAppName(), alertMessage: error.localizedDescription, cancelTitle: Utils.getStringWithTag(tag: "Reload"), otherTitle: "", VC: self) { (Index) in
+               
+                   self.getCategories()
+               }
+           }
+           
+       }
+    
+    func getProducts() {
+        
+        NetworkService.shared.getProducts()
+        
+            .done { (json) in
+
+                self.loader.stopAnimating()
+
+                let response = json as! Response
+
+                DataManager.shared.productsArr = response.data as! [Product]
+             
+                self.goToCategoriesScreen()
+
+            }
+            
+            .catch { (error) in
+                self.loader.stopAnimating()
+
+                Utils.showAlert(alertTitle: Utils.getAppName(), alertMessage: error.localizedDescription, cancelTitle: Utils.getStringWithTag(tag: "Continue"), otherTitle: Utils.getStringWithTag(tag: "Reload"), VC: self) { (Index) in
+                             
+                    if (Index == 1) {
+                        self.getProducts()
+                    } else {
+                        self.goToCategoriesScreen()
                     }
                 }
             }
-      }
+    }
 
-      func getProductsData() {
-        
-         NetworkService.getProducts { (success, response) in
-
-            self.loader.stopAnimating()
-
-            if (success) {
-               
-                Utils.getAppDelegate().productsArr = response!.data as! [Product]
-             }
-
-             self.goToCategoriesScreen()
-         }
-     }
   
 
 }
